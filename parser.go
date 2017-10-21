@@ -7,12 +7,15 @@ import (
 	"io/ioutil"
 )
 
-type Bean struct {
+type Beans struct {
 	XMLName xml.Name `xml:"beans"`
-	Bean []string `xml"bean"`
-	Id []string `xml:"id,attr"`
-	//Value []string `xml:value,attr`
+	BeanList []Bean `xml:"bean"`
 }
+
+type Bean struct {
+	Description string `xml:"description"`
+}
+
 
 func main() {
 
