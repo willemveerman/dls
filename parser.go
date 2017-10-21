@@ -2,14 +2,21 @@ package main
 
 import (
 	"fmt"
-	//"encoding/xml"
+	"encoding/xml"
 	"os"
-	//"path/filepath"
+	"io/ioutil"
 )
+
+type Bean struct {
+	XMLName xml.Name `xml:"beans"`
+	Bean []string `xml"bean"`
+	Id []string `xml:"id,attr"`
+	//Value []string `xml:value,attr`
+}
 
 func main() {
 
-	xml, err := os.Open("/Users/willemveerman/Documents/FSM/process-conf.xml")
+	xmlfile, err := os.Open("/Users/willemveerman/Documents/FSM/process-conf.xml")
 
 	if err != nil {
 		fmt.Println(err)
@@ -17,5 +24,13 @@ func main() {
 	fmt.Println("Successfully opened XML file.")
 	}
 
-	defer xml.Close()
+	byteValue, _ := ioutil.ReadAll(xmlfile)
+
+	var b Bean
+
+	xml.Unmarshal(byteValue, &b)
+
+	fmt.Println(b)
+
+	defer xmlfile.Close()
 }
