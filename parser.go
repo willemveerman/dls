@@ -13,7 +13,7 @@ type Beans struct {
 }
 
 type Bean struct {
-	Description string `xml:"description"`
+	Description string `xml:"description""`
 }
 
 
@@ -29,7 +29,7 @@ func main() {
 
 	byteValue, _ := ioutil.ReadAll(xmlfile)
 
-	var b Bean
+	var b Beans
 
 	xml.Unmarshal(byteValue, &b)
 
