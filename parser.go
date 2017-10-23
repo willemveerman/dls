@@ -13,7 +13,13 @@ type Beans struct {
 }
 
 type Bean struct {
+	Description string `xml:"description"`
+/*	Entry string `xml:"description""`
 	Description string `xml:"description""`
+	Description string `xml:"description""`
+	Description string `xml:"description""`
+	Description string `xml:"description""`
+	Description string `xml:"description""`*/
 }
 
 
