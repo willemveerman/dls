@@ -17,16 +17,10 @@ type Bean struct {
 	EntryList []Entry `xml:"property>map>entry"`
 }
 
-
 type Entry struct {
 	Key string `xml:"key,attr"`
-	//Description string `xml:"description""`
-	//Description string `xml:"description""`
-	//Description string `xml:"description""`
-	//Description string `xml:"description""`
-	//Description string `xml:"description""`
+	Value string `xml:"value,attr"`
 }
-
 
 func main() {
 
