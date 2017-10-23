@@ -8,11 +8,11 @@ import (
 )
 
 type Beans struct {
-	XMLName xml.Name `xml:"beans"`
 	BeanList []Bean `xml:"bean"`
 }
 
 type Bean struct {
+	Id string `xml:"id,attr"`
 	Description string `xml:"description"`
 	EntryList []Entry `xml:"property>map>entry"`
 }
