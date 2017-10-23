@@ -14,8 +14,9 @@ type Beans struct {
 
 type Bean struct {
 	Description string `xml:"description"`
-	EntryList []Entry `xml:"bean>property>map>entry"`
+	EntryList []Entry `xml:"property>map>entry"`
 }
+
 
 type Entry struct {
 	Key string `xml:"key,attr"`
