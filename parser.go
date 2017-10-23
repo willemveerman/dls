@@ -14,12 +14,16 @@ type Beans struct {
 
 type Bean struct {
 	Description string `xml:"description"`
-/*	Entry string `xml:"description""`
-	Description string `xml:"description""`
-	Description string `xml:"description""`
-	Description string `xml:"description""`
-	Description string `xml:"description""`
-	Description string `xml:"description""`*/
+	EntryList []Entry `xml:"bean>property>map>entry"`
+}
+
+type Entry struct {
+	Key string `xml:"key,attr"`
+	//Description string `xml:"description""`
+	//Description string `xml:"description""`
+	//Description string `xml:"description""`
+	//Description string `xml:"description""`
+	//Description string `xml:"description""`
 }
 
 
