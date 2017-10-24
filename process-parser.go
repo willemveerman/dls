@@ -32,9 +32,7 @@ func getElements(b Bean) map[string]string {
 	elements := make(map[string]string)
 
 	for _,v := range(b.EntryList) {
-
 		elements[v.Key] = v.Value
-
 	}
 
 	return elements
