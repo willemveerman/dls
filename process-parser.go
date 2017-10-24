@@ -38,7 +38,9 @@ func main() {
 
 	xml.Unmarshal(byteValue, &b)
 
-	fmt.Println(b)
+	c := b.BeanList
+
+	fmt.Println(c[0].EntryList[0])
 
 	defer xmlfile.Close()
 }
