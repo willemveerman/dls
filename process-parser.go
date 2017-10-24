@@ -24,7 +24,7 @@ type Entry struct {
 
 func getElements(b Bean) map[string]string {
 
-	var elements map[string]string
+	elements := make(map[string]string)
 
 	for _,v := range(b.EntryList) {
 
@@ -51,7 +51,9 @@ func main() {
 
 	xml.Unmarshal(byteValue, &b)
 
-	fmt.Println(b.BeanList[0].Id)
+	a := getElements(b.BeanList[0])
+
+	fmt.Println(a)
 
 	defer xmlfile.Close()
 }
