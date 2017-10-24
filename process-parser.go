@@ -22,6 +22,11 @@ type Entry struct {
 	Value string `xml:"value,attr"`
 }
 
+type XMLobjects struct {
+	Object string
+	Fields map[string]string
+}
+
 func getElements(b Bean) map[string]string {
 
 	elements := make(map[string]string)
