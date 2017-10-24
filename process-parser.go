@@ -22,6 +22,19 @@ type Entry struct {
 	Value string `xml:"value,attr"`
 }
 
+func getElements(b Bean) map[string]string {
+
+	var elements map[string]string
+
+	for _,v := range(b.EntryList) {
+
+		elements[v.Key] = v.Value
+
+	}
+
+	return elements
+}
+
 func main() {
 
 	xmlfile, err := os.Open("/Users/willemveerman/Documents/FSM/process-conf.xml")
@@ -38,9 +51,7 @@ func main() {
 
 	xml.Unmarshal(byteValue, &b)
 
-	c := b.BeanList
-
-	fmt.Println(c[0].EntryList[0])
+	fmt.Println(b.BeanList[0].Id)
 
 	defer xmlfile.Close()
 }
