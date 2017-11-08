@@ -27,15 +27,18 @@ type XMLobjects struct {
 	Fields map[string]string
 }
 
-func getElements(b Bean) map[string]string {
+func getElements(b Beans) map[string]map[string]string {
 
-	elements := make(map[string]string)
+	objects := make(map[string]map[string]string)
 
-	for _,v := range(b.EntryList) {
-		elements[v.Key] = v.Value
+	for _,v := range(b.BeanList) {
+		objects[v.Id] = make(map[string]string)
+		for _,c := range(v.EntryList) {
+				objects[v.Id][c.Key] = c.Value
+		}
 	}
 
-	return elements
+	return objects
 }
 
 func main() {
@@ -54,9 +57,9 @@ func main() {
 
 	xml.Unmarshal(byteValue, &b)
 
-	a := getElements(b.BeanList[0])
+	a := getElements(b)
 
-	fmt.Println(a)
+	fmt.Println(a["Address"])
 
 	defer xmlfile.Close()
 }
