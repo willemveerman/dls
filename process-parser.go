@@ -59,7 +59,9 @@ func main() {
 
 	a := getElements(b)
 
-	fmt.Println(a["Address"])
+	fmt.Println(b.BeanList[0].Id)
+
+	fmt.Println(a["Address"]["dataAccess.type"])
 
 	defer xmlfile.Close()
 }
