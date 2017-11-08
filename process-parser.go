@@ -27,6 +27,40 @@ type XMLobjects struct {
 	Fields map[string]string
 }
 
+type Object struct {
+	Id string
+	Attrs struct {
+		externalIdField []string
+		outputError []string
+		proxyPort []string
+		operation []string
+		endpoint []string
+		timeoutSecs []string
+		initialLastRunDate []string
+		proxyUsername []string
+		loadBulkApi []string
+		mappingFile []string
+		name []string
+		bulkApiCheckStatusInterval []string
+		entity []string
+		password []string
+		proxyHost []string
+		proxyPassword []string
+		loadBatchSize []string
+		bulkApiSerialMode []string
+		debugMessages []string
+		debugMessagesFile []string
+		username []string
+		Type []string
+		outputSuccess []string
+		readUTF8 []string
+		encryptionKeyFile []string
+		timezone []string
+		writeUTF8 []string
+
+	}
+}
+
 func getElements(b Beans) map[string]map[string]string {
 
 	objects := make(map[string]map[string]string)
@@ -61,7 +95,9 @@ func main() {
 
 	fmt.Println(b.BeanList[0].Id)
 
-	fmt.Println(a["Address"]["dataAccess.type"])
+	for key,_ := range(a["Address"]) {
+		fmt.Println(key)
+	}
 
 	defer xmlfile.Close()
 }
