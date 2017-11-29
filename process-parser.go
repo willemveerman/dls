@@ -22,57 +22,47 @@ type Entry struct {
 	Value string `xml:"value,attr"`
 }
 
-type XMLobjects struct {
-	Object string
-	Fields map[string]string
+type Objects struct {
+	objects map[string]map[string]string
 }
 
-type Object struct {
-	Id string
-	Attrs struct {
-		externalIdField []string
-		outputError []string
-		proxyPort []string
-		operation []string
-		endpoint []string
-		timeoutSecs []string
-		initialLastRunDate []string
-		proxyUsername []string
-		loadBulkApi []string
-		mappingFile []string
-		name []string
-		bulkApiCheckStatusInterval []string
-		entity []string
-		password []string
-		proxyHost []string
-		proxyPassword []string
-		loadBatchSize []string
-		bulkApiSerialMode []string
-		debugMessages []string
-		debugMessagesFile []string
-		username []string
-		Type []string
-		outputSuccess []string
-		readUTF8 []string
-		encryptionKeyFile []string
-		timezone []string
-		writeUTF8 []string
-
-	}
+type P_file struct {
+	total int
+	beans Objects
 }
 
-func getElements(b Beans) map[string]map[string]string {
+func (p P_file) capitalise(s string) string {
+	
+}
 
-	objects := make(map[string]map[string]string)
+func getElements_dict(b Beans) map[string]map[string]string {
+
+	objects_dict := make(map[string]map[string]string)
 
 	for _,v := range(b.BeanList) {
-		objects[v.Id] = make(map[string]string)
+		objects_dict[v.Id] = make(map[string]string)
 		for _,c := range(v.EntryList) {
-				objects[v.Id][c.Key] = c.Value
+				objects_dict[v.Id][c.Key] = c.Value
 		}
 	}
 
-	return objects
+	return objects_dict
+}
+
+func getElements(b Beans) Objects {
+
+	var objects_struct Objects
+
+	objects_struct.objects = make(map[string]map[string]string)
+
+	for _,v := range(b.BeanList) {
+		objects_struct.objects[v.Id] = make(map[string]string)
+		for _,c := range(v.EntryList) {
+			objects_struct.objects[v.Id][c.Key] = c.Value
+		}
+	}
+
+	return objects_struct
 }
 
 func main() {
@@ -91,13 +81,33 @@ func main() {
 
 	xml.Unmarshal(byteValue, &b)
 
-	a := getElements(b)
+	objects := getElements(b)
 
-	fmt.Println(b.BeanList[0].Id)
+	var pfile P_file
 
-	for key,_ := range(a["Address"]) {
-		fmt.Println(key)
-	}
+	pfile.total = len(objects.objects)
+
+	pfile.beans = objects
+
+	//var address Object
+
+	//address.Attribute = element_dict["Address"]
+
+	//fmt.Println(b.BeanList[0].Id)
+
+	//fmt.Println(address.Attribute["sfdc.proxyPort"])
+
+	//var address Object
+
+	//for key,value := range(element_dict["Address"]) {
+	//	fmt.Println(key, value)
+	//}
+
+	fmt.Println(objects.objects["Address"]["sfdc.proxyPort"])
+
+	fmt.Println(len(objects.objects))
+
+	fmt.Println(pfile.beans.objects["Location"])
 
 	defer xmlfile.Close()
 }
