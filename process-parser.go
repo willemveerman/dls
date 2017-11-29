@@ -32,7 +32,8 @@ type P_file struct {
 }
 
 func (p P_file) capitalise(s string) string {
-	
+	var a string
+	return a
 }
 
 func getElements_dict(b Beans) map[string]map[string]string {
@@ -81,6 +82,12 @@ func main() {
 
 	xml.Unmarshal(byteValue, &b)
 
+	c := b
+
+	xml.Marshal(c)
+
+	d := c
+
 	objects := getElements(b)
 
 	var pfile P_file
@@ -108,6 +115,8 @@ func main() {
 	fmt.Println(len(objects.objects))
 
 	fmt.Println(pfile.beans.objects["Location"])
+
+	fmt.Println(d)
 
 	defer xmlfile.Close()
 }
