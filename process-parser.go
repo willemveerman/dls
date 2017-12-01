@@ -82,12 +82,14 @@ func packElements(f P_file) Beans {
 		b.Class = v["class"]
 		b.Singleton = v["singleton"]
 		for key,val := range v {
-			b.Description = v["des"]
-			var e Entry
-			e.Key = key
-			e.Value = val
-			b.EntryList = append(b.EntryList, e)
+			if key != "class" && key != "singleton" && key != "description" {
+				var e Entry
+				e.Key = key
+				e.Value = val
+				b.EntryList = append(b.EntryList, e)
+			}
 		}
+
 		packedfile.BeanList = append(packedfile.BeanList, b)
 	}
 
