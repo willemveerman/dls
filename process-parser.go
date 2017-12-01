@@ -78,6 +78,7 @@ func packElements(f P_file) Beans {
 	for k,v := range f.beans.objects {
 		var b Bean
 		b.Id = k
+		b.Description = v["description"]
 		b.Class = v["class"]
 		b.Singleton = v["singleton"]
 		for key,val := range v {
@@ -116,6 +117,10 @@ func main() {
 	xml.Marshal(c)
 
 	objects := getElements(b)
+
+	ff := b.BeanList[0].Description
+
+	fmt.Println("Description:",ff)
 
 	var pfile P_file
 
