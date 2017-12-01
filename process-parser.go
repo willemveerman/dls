@@ -13,6 +13,8 @@ type Beans struct {
 
 type Bean struct {
 	Id string `xml:"id,attr"`
+	Class string `xml:"class,attr"`
+	Singleton string `xml:"singleton,attr"`
 	Description string `xml:"description"`
 	EntryList []Entry `xml:"property>map>entry"`
 }
@@ -58,6 +60,9 @@ func getElements(b Beans) Objects {
 
 	for _,v := range(b.BeanList) {
 		objects_struct.objects[v.Id] = make(map[string]string)
+		objects_struct.objects[v.Id]["description"] = v.Description
+		objects_struct.objects[v.Id]["class"] = v.Class
+		objects_struct.objects[v.Id]["singleton"] = v.Singleton
 		for _,c := range(v.EntryList) {
 			objects_struct.objects[v.Id][c.Key] = c.Value
 		}
@@ -73,8 +78,10 @@ func packElements(f P_file) Beans {
 	for k,v := range f.beans.objects {
 		var b Bean
 		b.Id = k
+		b.Class = v["class"]
+		b.Singleton = v["singleton"]
 		for key,val := range v {
-			b.Description = v["de"]
+			b.Description = v["des"]
 			var e Entry
 			e.Key = key
 			e.Value = val
