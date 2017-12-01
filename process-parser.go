@@ -22,13 +22,13 @@ type Entry struct {
 	Value string `xml:"value,attr"`
 }
 
-type Objects struct {
-	objects map[string]map[string]string
-}
-
 type P_file struct {
 	total int
 	beans Objects
+}
+
+type Objects struct {
+	objects map[string]map[string]string
 }
 
 func (p P_file) capitalise(s string) string {
@@ -66,6 +66,26 @@ func getElements(b Beans) Objects {
 	return objects_struct
 }
 
+func packElements(f P_file) Beans {
+
+	var packedfile Beans
+
+	for k,v := range f.beans.objects {
+		var b Bean
+		b.Id = k
+		for key,val := range v {
+			b.Description = v["de"]
+			var e Entry
+			e.Key = key
+			e.Value = val
+			b.EntryList = append(b.EntryList, e)
+		}
+		packedfile.BeanList = append(packedfile.BeanList, b)
+	}
+
+	return packedfile
+}
+
 func main() {
 
 	xmlfile, err := os.Open("/Users/willemveerman/Documents/FSM/process-conf.xml")
@@ -82,11 +102,11 @@ func main() {
 
 	xml.Unmarshal(byteValue, &b)
 
+	//fmt.Println("b.BeanList[0]",b.BeanList)
+
 	c := b
 
 	xml.Marshal(c)
-
-	d := c
 
 	objects := getElements(b)
 
@@ -95,6 +115,13 @@ func main() {
 	pfile.total = len(objects.objects)
 
 	pfile.beans = objects
+
+	unpacked := packElements(pfile)
+
+	packed, err := xml.Marshal(unpacked)
+
+
+	ioutil.WriteFile("xmlout.xml",packed, 0644)
 
 	//var address Object
 
@@ -110,13 +137,33 @@ func main() {
 	//	fmt.Println(key, value)
 	//}
 
-	fmt.Println(objects.objects["Address"]["sfdc.proxyPort"])
+	fmt.Println(objects.objects["Address"])
+
+	for k,_ := range objects.objects {
+		fmt.Println(k)
+	}
 
 	fmt.Println(len(objects.objects))
 
-	fmt.Println(pfile.beans.objects["Location"])
+	//fmt.Println(pfile.beans.objects["Location"])
 
-	fmt.Println(d)
+	a := 42
+
+	point := &a
+
+	fmt.Println(*point)
+
+	fmt.Println(&point)
+
+	fmt.Println(point)
+
+	line, _ := fmt.Println(point)
+
+	fmt.Println(line)
+
+	a = 21
+
+	fmt.Println(*point)
 
 	defer xmlfile.Close()
 }
