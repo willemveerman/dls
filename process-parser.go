@@ -112,12 +112,12 @@ func main() {
 
 	pfile.beans = objects
 
-	unpacked := packElements(pfile)
+	packed := packElements(pfile)
 
-	packed, err := xml.Marshal(unpacked)
+	marshalled, err := xml.MarshalIndent(packed,"","	")
 
 
-	ioutil.WriteFile("xmlout.xml",packed, 0644)
+	ioutil.WriteFile("xmlout.xml",marshalled, 0644)
 
 	//var address Object
 
