@@ -33,24 +33,6 @@ type Objects struct {
 	objects map[string]map[string]string
 }
 
-func (p P_file) capitalise(s string) string {
-	var a string
-	return a
-}
-
-func getElements_dict(b Beans) map[string]map[string]string {
-
-	objects_dict := make(map[string]map[string]string)
-
-	for _,v := range(b.BeanList) {
-		objects_dict[v.Id] = make(map[string]string)
-		for _,c := range(v.EntryList) {
-				objects_dict[v.Id][c.Key] = c.Value
-		}
-	}
-
-	return objects_dict
-}
 
 func unpackElements(b Beans) Objects {
 
