@@ -30,48 +30,48 @@ type P_file struct {
 }
 
 type Objects struct {
-	objects map[string]map[string]string
+	object map[string]map[string]string
 }
 
-func unpackElements(b Beans) Objects {
+func unpackElements(packed Beans) Objects {
 
-	var objects_struct Objects
+	var objects Objects
 
-	objects_struct.objects = make(map[string]map[string]string)
+	objects.object = make(map[string]map[string]string)
 
-	for _,v := range(b.BeanList) {
-		objects_struct.objects[v.Id] = make(map[string]string)
-		objects_struct.objects[v.Id]["description"] = v.Description
-		objects_struct.objects[v.Id]["class"] = v.Class
-		objects_struct.objects[v.Id]["singleton"] = v.Singleton
-		for _,c := range(v.EntryList) {
-			objects_struct.objects[v.Id][c.Key] = c.Value
+	for _,v := range packed.BeanList {
+		objects.object[v.Id] = make(map[string]string)
+		objects.object[v.Id]["description"] = v.Description
+		objects.object[v.Id]["class"] = v.Class
+		objects.object[v.Id]["singleton"] = v.Singleton
+		for _,c := range v.EntryList {
+			objects.object[v.Id][c.Key] = c.Value
 		}
 	}
 
-	return objects_struct
+	return objects
 }
 
-func packElements(f P_file) Beans {
+func packElements(unpacked P_file) Beans {
 
 	var packedfile Beans
 
-	for k,v := range f.beans.objects {
-		var b Bean
-		b.Id = k
-		b.Description = v["description"]
-		b.Class = v["class"]
-		b.Singleton = v["singleton"]
+	for k,v := range unpacked.beans.object {
+		var bean Bean
+		bean.Id = k
+		bean.Description = v["description"]
+		bean.Class = v["class"]
+		bean.Singleton = v["singleton"]
 		for key,val := range v {
 			if key != "class" && key != "singleton" && key != "description" {
 				var e Entry
 				e.Key = key
 				e.Value = val
-				b.EntryList = append(b.EntryList, e)
+				bean.EntryList = append(bean.EntryList, e)
 			}
 		}
 
-		packedfile.BeanList = append(packedfile.BeanList, b)
+		packedfile.BeanList = append(packedfile.BeanList, bean)
 	}
 
 	return packedfile
@@ -107,7 +107,7 @@ func main() {
 
 	var pfile P_file
 
-	pfile.total = len(objects.objects)
+	pfile.total = len(objects.object)
 
 	pfile.beans = objects
 
@@ -132,13 +132,13 @@ func main() {
 	//	fmt.Println(key, value)
 	//}
 
-	fmt.Println(objects.objects["Address"])
+	fmt.Println(objects.object["Address"])
 
-	for k,_ := range objects.objects {
+	for k,_ := range objects.object {
 		fmt.Println(k)
 	}
 
-	fmt.Println(len(objects.objects))
+	fmt.Println(len(objects.object))
 
 	//fmt.Println(pfile.beans.objects["Location"])
 
