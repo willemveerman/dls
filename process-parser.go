@@ -52,7 +52,7 @@ func getElements_dict(b Beans) map[string]map[string]string {
 	return objects_dict
 }
 
-func getElements(b Beans) Objects {
+func unpackElements(b Beans) Objects {
 
 	var objects_struct Objects
 
@@ -118,7 +118,7 @@ func main() {
 
 	xml.Marshal(c)
 
-	objects := getElements(b)
+	objects := unpackElements(b)
 
 	ff := b.BeanList[0].Description
 
