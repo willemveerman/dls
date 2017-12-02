@@ -33,7 +33,6 @@ type Objects struct {
 	objects map[string]map[string]string
 }
 
-
 func unpackElements(b Beans) Objects {
 
 	var objects_struct Objects
