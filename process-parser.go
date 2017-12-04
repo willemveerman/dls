@@ -93,8 +93,6 @@ func main() {
 
 	xml.Unmarshal(byteValue, &b)
 
-	//fmt.Println("b.BeanList[0]",b.BeanList)
-
 	c := b
 
 	xml.Marshal(c)
@@ -117,20 +115,6 @@ func main() {
 
 
 	ioutil.WriteFile("xmlout.xml",marshalled, 0644)
-
-	//var address Object
-
-	//address.Attribute = element_dict["Address"]
-
-	//fmt.Println(b.BeanList[0].Id)
-
-	//fmt.Println(address.Attribute["sfdc.proxyPort"])
-
-	//var address Object
-
-	//for key,value := range(element_dict["Address"]) {
-	//	fmt.Println(key, value)
-	//}
 
 	fmt.Println(objects.object["Address"])
 
