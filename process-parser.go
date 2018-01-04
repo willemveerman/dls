@@ -124,8 +124,6 @@ func main() {
 
 	fmt.Println(len(objects.object))
 
-	//fmt.Println(pfile.beans.objects["Location"])
-
 	a := 42
 
 	point := &a
